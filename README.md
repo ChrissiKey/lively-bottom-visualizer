@@ -8,7 +8,8 @@
 <p align="center">
   <a href="https://github.com/ChrissiKey/lively-bottom-visualizer/raw/main/release/Bottom-Rainbow-Visualizer.zip"><img src="https://img.shields.io/badge/Download-Bottom--Rainbow--Visualizer.zip-2ea44f?style=for-the-badge&logo=github" alt="Download"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT"></a>
-  <img src="https://img.shields.io/badge/Lively-2.x-8a2be2?style=for-the-badge" alt="Lively 2.x">
+  <a href="https://github.com/ChrissiKey/lively-bottom-visualizer/releases"><img src="https://img.shields.io/badge/Version-1.0.0-8a2be2?style=for-the-badge" alt="Version 1.0.0"></a>
+  <img src="https://img.shields.io/badge/Lively-2.x-555?style=for-the-badge" alt="Lively 2.x">
   <img src="https://img.shields.io/badge/1080p_%C2%B7_4K-ready-orange?style=for-the-badge" alt="4K ready">
 </p>
 

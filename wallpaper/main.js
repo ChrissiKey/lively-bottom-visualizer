@@ -4,6 +4,7 @@
  * Basiert auf lively-audio-visualizer von elias123tre:
  * https://github.com/eliasfloreteng/lively-audio-visualizer
  * Lizenz: MIT
+ * Version: 1.0.0
  *
  * Balken-Spektrum am unteren Bildschirmrand (LED-Blöcke oder durchgehend),
  * ohne Spiegelung, mit Farbmodi nach Frequenzband, Pegel oder Regenbogen.
@@ -17,6 +18,8 @@
 // ---------------------------------------------------------------------------
 // Einstellungen (Standardwerte = LivelyProperties.json)
 // ---------------------------------------------------------------------------
+const VERSION = "1.0.0"
+
 const S = {
   // Balken
   barCount: 64,
@@ -661,7 +664,7 @@ function drawDebug() {
   const lines = [
     `Audio-Update: ${audioInterval.toFixed(0)} ms  |  Werte: ${debugInfo.len}  |  Roh-Max: ${debugInfo.rawMax.toFixed(2)}`,
     `Referenzpegel: ${runningPeak.toFixed(2)}  |  Balken: ${S.barCount}  |  Bins genutzt: ${S.freqRange}%`,
-    `Canvas: ${canvas.width}x${canvas.height} (${Math.round(renderFactor * 100)}%)  |  JS-Heap: ${mem}  |  FPS-Limit: ${S.maxFps}`,
+    `Canvas: ${canvas.width}x${canvas.height} (${Math.round(renderFactor * 100)}%)  |  JS-Heap: ${mem}  |  FPS-Limit: ${S.maxFps}  |  v${VERSION}`,
   ]
   const u = Math.max(1, H / 1080) // Skalierung für 4K
   ctx.font = `${Math.round(14 * u)}px monospace`
