@@ -242,6 +242,17 @@
       "perfLabel": {
         "value": "━━━━━━━━  7 · LEISTUNG & DIAGNOSE  ━━━━━━━━"
       },
+      "renderScale": {
+        "text": "Interne Render-Auflösung",
+        "help": "Niedriger = weniger RAM und GPU-Last. Bei 4K rendert 'Automatisch' in 1440p, was bei LED-Blöcken identisch aussieht.",
+        "items": [
+          "Automatisch (max. 1440p)",
+          "100 %",
+          "75 %",
+          "50 %",
+          "33 %"
+        ]
+      },
       "maxFps": {
         "text": "Maximale Bildrate (FPS, niedriger = weniger Last)"
       },

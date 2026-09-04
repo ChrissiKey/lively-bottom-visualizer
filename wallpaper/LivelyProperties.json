@@ -497,6 +497,19 @@
     "type": "label",
     "value": "━━━━━━━━  7 · PERFORMANCE & DIAGNOSTICS  ━━━━━━━━"
   },
+  "renderScale": {
+    "type": "dropdown",
+    "text": "Internal render resolution",
+    "help": "Lower = less RAM and GPU load. At 4K, 'Auto' renders at 1440p, which looks identical for LED blocks.",
+    "items": [
+      "Auto (max. 1440p)",
+      "100 %",
+      "75 %",
+      "50 %",
+      "33 %"
+    ],
+    "value": 0
+  },
   "maxFps": {
     "type": "slider",
     "text": "Maximum frame rate (FPS, lower = less load)",

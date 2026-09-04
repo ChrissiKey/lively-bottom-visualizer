@@ -76,6 +76,7 @@ const S = {
   bgBlur: 0,
   bgDim: 0,
   // Leistung / Debug
+  renderScale: 0, // 0 = automatisch (max. 1440p), sonst Prozent der Bildschirmauflösung
   maxFps: 60,
   debug: false,
 }
@@ -398,14 +399,27 @@ function heightDependentColor() {
 // ---------------------------------------------------------------------------
 // Zeichnen
 // ---------------------------------------------------------------------------
+// Interne Render-Auflösung: Bei 4K sind die Bildpuffer der größte Speicherposten
+// (jeder Puffer 3840x2160x4 Byte = 33 MB, der Browser hält mehrere davon).
+// LED-Blöcke sehen auch hochskaliert sauber aus.
+let renderFactor = 1
+function computeRenderFactor() {
+  const fullH = H * dpr
+  if (S.renderScale > 0) return clamp(S.renderScale, 25, 100) / 100
+  return fullH > 1440 ? 1440 / fullH : 1 // automatisch: höchstens 1440p intern
+}
+
 function resize() {
   if (!canvas) return
   dpr = window.devicePixelRatio || 1
   W = window.innerWidth
   H = window.innerHeight
-  canvas.width = Math.round(W * dpr)
-  canvas.height = Math.round(H * dpr)
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+  renderFactor = computeRenderFactor()
+  const k = dpr * renderFactor
+  canvas.width = Math.max(1, Math.round(W * k))
+  canvas.height = Math.max(1, Math.round(H * k))
+  ctx.setTransform(k, 0, 0, k, 0, 0)
+  colorCacheKey = ""
 }
 
 function roundedRectPath(x, y, w, h, r) {
@@ -643,14 +657,16 @@ function drawNotice(now) {
 }
 
 function drawDebug() {
+  const mem = performance.memory ? `${(performance.memory.usedJSHeapSize / 1048576).toFixed(1)} MB` : "n/a"
   const lines = [
     `Audio-Update: ${audioInterval.toFixed(0)} ms  |  Werte: ${debugInfo.len}  |  Roh-Max: ${debugInfo.rawMax.toFixed(2)}`,
     `Referenzpegel: ${runningPeak.toFixed(2)}  |  Balken: ${S.barCount}  |  Bins genutzt: ${S.freqRange}%`,
+    `Canvas: ${canvas.width}x${canvas.height} (${Math.round(renderFactor * 100)}%)  |  JS-Heap: ${mem}  |  FPS-Limit: ${S.maxFps}`,
   ]
   const u = Math.max(1, H / 1080) // Skalierung für 4K
   ctx.font = `${Math.round(14 * u)}px monospace`
   ctx.fillStyle = "rgba(0,0,0,0.6)"
-  ctx.fillRect(8 * u, 8 * u, 600 * u, 134 * u)
+  ctx.fillRect(8 * u, 8 * u, 600 * u, 152 * u)
   ctx.fillStyle = "#fff"
   lines.forEach((l, i) => ctx.fillText(l, 16 * u, (28 + i * 18) * u))
   // Rohe Bins als kleine Kurve (auf Maximum normiert), jeder 8. Bin gelb
@@ -661,7 +677,7 @@ function drawDebug() {
     for (let i = 0; i < raw.length; i++) {
       const h = (raw[i] / m) * 80 * u
       ctx.fillStyle = i % 8 === 0 ? "#ff8" : "#8cf"
-      ctx.fillRect(16 * u + i * bw, 138 * u - h, Math.max(1, bw - 1), h)
+      ctx.fillRect(16 * u + i * bw, 156 * u - h, Math.max(1, bw - 1), h)
     }
   }
 }
@@ -1000,6 +1016,12 @@ function setProperty(name, val) {
     case "maxFps":
       S.maxFps = clamp(toNum(val, 60), 15, 60)
       break
+    case "renderScale": {
+      const options = [0, 100, 75, 50, 33]
+      S.renderScale = options[clamp(Math.round(toNum(val, 0)), 0, options.length - 1)]
+      resize()
+      break
+    }
     default:
       break
   }

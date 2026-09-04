@@ -61,7 +61,7 @@ Based on [lively-audio-visualizer](https://github.com/eliasfloreteng/lively-audi
 | **4 · Extras** | Peak markers and their fall speed, reflection with opacity and height |
 | **5 · Background** | Background color, optional image from the `images` folder, blur, dim |
 | **6 · Presets & backup** | Backup slot 1–3, *Save settings*, *Load settings*, preset file, *Load preset*, *Use slider values* |
-| **7 · Performance & diagnostics** | Maximum frame rate, diagnostics overlay |
+| **7 · Performance & diagnostics** | Internal render resolution, maximum frame rate, diagnostics overlay (audio data, canvas size, memory) |
 
 ## 💾 Presets, backup and updates
 
@@ -105,6 +105,24 @@ appears as a preset – the wallpaper reads both preset formats.
 - Kicks should pump: *Fall smoothing* 30–50, *Rise smoothing* 5–20.
 - Use the *diagnostics overlay* (group 7) to see which FFT bins your music actually hits, then set
   *Frequency range used* accordingly.
+
+## 🧠 Memory and 4K
+
+The browser engine behind Lively keeps several full-screen buffers; at 4K each one is 33 MB, so the working
+set of the wallpaper process is mostly framebuffers, not the script (its JavaScript heap stays around 10 MB and
+does not grow). Measured in a 4K test window (Chromium process group, glow on):
+
+| Setting | Memory |
+|---|---|
+| Empty black 4K page (browser baseline) | ~385 MB |
+| Wallpaper, render resolution 100 % | ~715 MB |
+| Wallpaper, **Auto** (1440p internal, default) | ~550 MB |
+| Wallpaper, 50 % (1080p internal) | ~500 MB |
+
+The *Internal render resolution* setting in group 7 draws the picture at a lower resolution and lets the GPU
+scale it up. With LED blocks the difference is invisible at normal viewing distance; the block edges become
+slightly softer at 50 %. Frame rate mostly affects CPU/GPU load, not memory – combine *30 FPS* with *Glow 0*
+for the lightest setup on a second monitor while gaming.
 
 ## 🎮 Running while gaming
 
@@ -212,7 +230,7 @@ Basiert auf [lively-audio-visualizer](https://github.com/eliasfloreteng/lively-a
 | **4 · Extras** | Spitzen-Markierungen und Fallgeschwindigkeit, Spiegelung mit Deckkraft und Höhe |
 | **5 · Hintergrund** | Hintergrundfarbe, optionales Bild aus dem Ordner `images`, Unschärfe, Abdunkeln |
 | **6 · Presets & Sicherung** | Speicherplatz 1–3, *Einstellungen sichern*, *Einstellungen laden*, Preset-Datei, *Preset laden*, *Reglerwerte verwenden* |
-| **7 · Leistung & Diagnose** | Maximale Bildrate, Diagnose-Anzeige |
+| **7 · Leistung & Diagnose** | Interne Render-Auflösung, maximale Bildrate, Diagnose-Anzeige (Audiodaten, Canvas-Größe, Speicher) |
 
 ## 💾 Presets, Sicherung und Updates
 
@@ -256,6 +274,24 @@ dann erscheint sie als Preset – das Wallpaper liest beide Preset-Formate.
 - Kicks sollen pumpen: *Glättung Abfall* 30–50, *Glättung Anstieg* 5–20.
 - Die *Diagnose-Anzeige* (Gruppe 7) zeigt, welche FFT-Bins deine Musik tatsächlich trifft; danach den
   *Genutzten Frequenzbereich* einstellen.
+
+## 🧠 Speicher und 4K
+
+Die Browser-Engine hinter Lively hält mehrere Vollbild-Puffer; bei 4K ist jeder 33 MB groß. Der Speicherbedarf
+des Wallpaper-Prozesses besteht daher fast nur aus Bildpuffern, nicht aus dem Skript (dessen JavaScript-Heap
+bleibt bei etwa 10 MB und wächst nicht). Gemessen in einem 4K-Testfenster (Chromium-Prozessgruppe, Leuchten an):
+
+| Einstellung | Speicher |
+|---|---|
+| Leere schwarze 4K-Seite (Grundverbrauch des Browsers) | ~385 MB |
+| Wallpaper, Render-Auflösung 100 % | ~715 MB |
+| Wallpaper, **Automatisch** (1440p intern, Standard) | ~550 MB |
+| Wallpaper, 50 % (1080p intern) | ~500 MB |
+
+Die *Interne Render-Auflösung* in Gruppe 7 zeichnet das Bild in niedrigerer Auflösung und lässt die GPU
+hochskalieren. Bei LED-Blöcken ist der Unterschied aus normalem Abstand unsichtbar; bei 50 % werden die
+Blockkanten etwas weicher. Die Bildrate beeinflusst vor allem CPU/GPU-Last, kaum den Speicher – *30 FPS* plus
+*Leuchten 0* ist die leichteste Einstellung für einen zweiten Monitor beim Spielen.
 
 ## 🎮 Spiele
 
