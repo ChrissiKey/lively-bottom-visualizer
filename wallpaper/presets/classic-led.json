@@ -1,0 +1,8 @@
+{
+  "barStyle": 1, "barCount": 32, "barGap": 15, "segmentHeight": 0, "segmentGap": 30, "barHeight": 60,
+  "zeroLine": true, "roundedBars": false, "mirrorBars": false, "glow": 0, "verticalFade": 0,
+  "colorMode": 4, "levelColorLow": "#19e65a", "levelColorMid": "#ffe020", "levelColorHigh": "#ff2a2a",
+  "showPeaks": true, "peakFall": 35, "reflection": false,
+  "freqRange": 60, "freqCurve": 35, "bassCompensation": 45, "autoGain": true,
+  "perBarGain": 30, "sharpen": 30, "sensitivity": 100, "contrast": 50, "smoothRise": 20, "smoothFall": 55
+}

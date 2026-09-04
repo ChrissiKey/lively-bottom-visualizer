@@ -1,0 +1,14 @@
+{
+  "AppVersion": "2.0.0.0",
+  "Title": "Bottom Rainbow Audio Visualizer",
+  "Thumbnail": "thumbnail.jpg",
+  "Preview": null,
+  "Desc": "LED-style bar spectrum at the bottom of the screen: static or moving rainbow, frequency-band and level colors, sharp response tuned for bass-heavy music (hardstyle), 60 FPS smoothing, no reflection. Based on lively-audio-visualizer by elias123tre.",
+  "Author": "ChrissiKey",
+  "License": "MIT",
+  "Contact": "https://github.com/ChrissiKey/lively-bottom-visualizer",
+  "Type": 2,
+  "FileName": "index.html",
+  "Arguments": null,
+  "IsAbsolutePath": false
+}
