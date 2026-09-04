@@ -124,10 +124,20 @@ let burstCount = 0
 let burstTimer = 0
 let pendingChange = null
 let presetFile = "" // gewählte Datei im Ordner presets
-let store = { override: null, snapshot: null }
+let store = { override: null, snapshot: null, slots: {} }
+let slotNumber = 1
+const notice = { text: "", until: 0 }
+const isGerman = /^de/i.test(navigator.language || "")
+function showNotice(de, en) {
+  notice.text = isGerman ? de : en
+  notice.until = performance.now() + 3500
+  idleFrames = 0
+  if (!rafId && !paused) startLoop()
+}
 try {
   const raw = localStorage.getItem(STORAGE_KEY)
   if (raw) store = Object.assign(store, JSON.parse(raw))
+  if (!store.slots || typeof store.slots !== "object") store.slots = {}
 } catch (e) {}
 
 // ---------------------------------------------------------------------------
@@ -604,6 +614,34 @@ function drawBars(baseY, maxH, alpha, withGlow, withPeaks) {
   else drawSolidBars(baseY, maxH, alpha, withGlow, withPeaks)
 }
 
+function drawNotice(now) {
+  if (!notice.text || now > notice.until) return
+  const remaining = notice.until - now
+  const alpha = Math.min(1, remaining / 500)
+  const u = Math.max(1, H / 1080)
+  const fontPx = Math.round(18 * u)
+  ctx.save()
+  ctx.globalAlpha = alpha
+  ctx.font = `600 ${fontPx}px "Segoe UI", Roboto, Arial, sans-serif`
+  const tw = ctx.measureText(notice.text).width
+  const pad = fontPx * 0.8
+  const bw = tw + pad * 2
+  const bh = fontPx + pad * 1.2
+  const x = (W - bw) / 2
+  const y = H * 0.08
+  ctx.fillStyle = "rgba(0,0,0,0.7)"
+  roundedRectPath(x, y, bw, bh, pad * 0.5)
+  ctx.fill()
+  ctx.strokeStyle = "rgba(255,255,255,0.25)"
+  ctx.lineWidth = Math.max(1, u)
+  ctx.stroke()
+  ctx.fillStyle = "#fff"
+  ctx.textBaseline = "middle"
+  ctx.fillText(notice.text, x + pad, y + bh / 2)
+  ctx.restore()
+  idleFrames = 0
+}
+
 function drawDebug() {
   const lines = [
     `Audio-Update: ${audioInterval.toFixed(0)} ms  |  Werte: ${debugInfo.len}  |  Roh-Max: ${debugInfo.rawMax.toFixed(2)}`,
@@ -716,6 +754,7 @@ function renderFrame(now) {
 
   drawBars(baseY, maxH, S.barOpacity / 100, S.glow > 0, true)
 
+  drawNotice(now)
   if (S.debug) drawDebug()
 }
 
@@ -819,9 +858,12 @@ function loadPreset(file) {
         store.override = currentSettings()
         store.snapshot = currentSettings()
         saveStore()
+        showNotice(`Preset geladen: ${path.slice(8)}`, `Preset loaded: ${path.slice(8)}`)
+      } else {
+        showNotice("Preset enthält keine gültigen Werte", "Preset contains no valid values")
       }
     })
-    .catch(() => {})
+    .catch(() => showNotice("Preset konnte nicht gelesen werden", "Could not read preset"))
 }
 
 function livelyPropertyListener(name, val) {
@@ -849,17 +891,35 @@ function livelyPropertyListener(name, val) {
     case "applyPreset":
       loadPreset(presetFile)
       return
-    case "restoreLast":
-      if (store.snapshot) {
-        applySettingsObject(store.snapshot)
-        store.override = currentSettings()
-        saveStore()
-      }
+    case "slotNumber":
+      slotNumber = clamp(Math.round(toNum(val, 0)), 0, 2) + 1
       return
+    case "saveSlot": {
+      const data = currentSettings()
+      data._savedAt = new Date().toISOString()
+      store.slots[slotNumber] = data
+      saveStore()
+      showNotice(`Einstellungen in Speicherplatz ${slotNumber} gesichert`, `Settings saved to slot ${slotNumber}`)
+      return
+    }
+    case "loadSlot": {
+      const data = store.slots[slotNumber]
+      if (!data) {
+        showNotice(`Speicherplatz ${slotNumber} ist leer`, `Slot ${slotNumber} is empty`)
+        return
+      }
+      applySettingsObject(data)
+      store.override = currentSettings()
+      saveStore()
+      const when = data._savedAt ? new Date(data._savedAt).toLocaleString() : ""
+      showNotice(`Speicherplatz ${slotNumber} geladen (${when})`, `Slot ${slotNumber} loaded (${when})`)
+      return
+    }
     case "useLivelyValues":
       store.override = null
       saveStore()
       applySettingsObject(livelyValues)
+      showNotice("Reglerwerte von Lively aktiv", "Using Lively's slider values")
       return
     default:
       break

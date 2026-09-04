@@ -29,7 +29,7 @@ Based on [lively-audio-visualizer](https://github.com/eliasfloreteng/lively-audi
 | 🌈 **Six color modes** | Rainbow (static or slowly drifting), two-color gradient, single color, **frequency bands** (own color for bass / mids / highs with adjustable boundaries), **level** (color by bar height, e.g. green → yellow → red), vertical rainbow. Every color is a color picker. |
 | ➖ **Zero line** | One row of blocks always stays lit – even in silence the visualizer never disappears. |
 | 🎚️ **Made for bass-heavy music** | Automatic gain for Lively's raw FFT data, per-bar normalization, spectrum sharpening, adjustable frequency range and bass resolution, rise/fall smoothing. Kicks stay kicks, leads stay visible. |
-| 💾 **Presets & backup** | Seven presets in the `presets` folder, one-click loading, restore of your last settings after an update. Copy Lively's saved settings file into the folder and it becomes a preset. |
+| 💾 **Backup & presets** | Save all current settings into one of three slots with one click and load them back any time, also after an update. Seven ready-made presets in the `presets` folder. |
 | 🌍 **English & German** | The settings panel follows Lively's language. Seven clearly separated groups: Style · Colors · Music & sensitivity · Extras · Background · Presets & backup · Performance & diagnostics. |
 | 🪶 **Light on resources** | Color cache, reusable buffers, idle mode in silence (5 checks per second instead of 60 frames), FPS limiter, glow can be switched off. Stops completely while Lively pauses the wallpaper. |
 | 🔒 **Offline & hardened** | No external scripts, fonts or requests. Content-Security-Policy, range-checked settings, validated preset files. |
@@ -60,10 +60,15 @@ Based on [lively-audio-visualizer](https://github.com/eliasfloreteng/lively-audi
 | **3 · Music & sensitivity** | Automatic level, sensitivity, frequency range, bass resolution, boost highs, normalize bars individually, sharpen spectrum, dynamics, rise/fall smoothing, lowest FFT bin |
 | **4 · Extras** | Peak markers and their fall speed, reflection with opacity and height |
 | **5 · Background** | Background color, optional image from the `images` folder, blur, dim |
-| **6 · Presets & backup** | Preset file, *Load preset*, *Restore last settings*, *Use slider values* |
+| **6 · Presets & backup** | Backup slot 1–3, *Save settings*, *Load settings*, preset file, *Load preset*, *Use slider values* |
 | **7 · Performance & diagnostics** | Maximum frame rate, diagnostics overlay |
 
 ## 💾 Presets, backup and updates
+
+**Save all settings with one click:** group 6 → choose *Slot 1–3* → **Save settings**. Everything you have set
+up is stored as one backup; the wallpaper confirms it on screen. **Load settings** brings the whole backup back,
+also after a restart of Lively or an in-place update. Three slots let you keep e.g. a day look, a night look
+and a gaming look.
 
 **Load a preset:** group 6 → choose a file → *Load preset*. Shipped presets:
 
@@ -80,16 +85,16 @@ Based on [lively-audio-visualizer](https://github.com/eliasfloreteng/lively-audi
 A loaded preset survives restarts of Lively. The sliders keep showing Lively's own values until you move one;
 a moved slider always wins.
 
-**Back up your own settings:** Lively stores the slider values in
+**Backup as a file (survives a fresh install):** Lively stores the slider values in
 `<Lively library folder>\SaveData\wpdata\<wallpaper folder>\<display>\LivelyProperties.json`
 (the library folder is shown in Lively → *Settings → General*; the wallpaper folder is the one that
 *Open file location* opens). Copy that file into the wallpaper's `presets` folder under any name and it
 appears as a preset – the wallpaper reads both preset formats.
 
 **Update without losing settings:**
-- *In place (recommended):* right-click the wallpaper → *Open file location* → replace the files with the new
-  version. Your settings stay. New sliders appear only after *Restore default* in Lively's customize panel;
-  afterwards press *Restore last settings* in group 6 to get your values back.
+- *In place (recommended):* first **Save settings** into a slot, then right-click the wallpaper →
+  *Open file location* → replace the files with the new version. New sliders appear after *Restore default* in
+  Lively's customize panel; afterwards **Load settings** from the slot brings your values back.
 - *Fresh import of the new zip:* copy your backed-up `LivelyProperties.json` into the new `presets` folder and
   load it as a preset.
 
@@ -175,7 +180,7 @@ Basiert auf [lively-audio-visualizer](https://github.com/eliasfloreteng/lively-a
 | 🌈 **Sechs Farbmodi** | Regenbogen (statisch oder langsam wandernd), Zwei-Farben-Verlauf, Einfarbig, **Frequenzbänder** (eigene Farbe für Bass / Mitten / Höhen mit einstellbaren Grenzen), **Pegel** (Farbe nach Balkenhöhe, z. B. Grün → Gelb → Rot), Regenbogen vertikal. Jede Farbe per Farbwähler. |
 | ➖ **Nulllinie** | Eine Blockreihe bleibt immer an – auch bei Stille verschwindet der Visualizer nie. |
 | 🎚️ **Gemacht für basslastige Musik** | Automatische Pegelanpassung für Livelys rohe FFT-Daten, Balken einzeln normieren, Spektrum schärfen, einstellbarer Frequenzbereich und Bass-Auflösung, Glättung für Anstieg und Abfall. Kicks bleiben Kicks, Leads bleiben sichtbar. |
-| 💾 **Presets & Sicherung** | Sieben Presets im Ordner `presets`, Laden per Knopfdruck, Wiederherstellen der letzten Einstellungen nach einem Update. Livelys gespeicherte Einstellungsdatei in den Ordner kopieren, und sie wird zum Preset. |
+| 💾 **Sicherung & Presets** | Alle aktuellen Einstellungen mit einem Klick in einen von drei Speicherplätzen sichern und jederzeit zurückladen, auch nach einem Update. Sieben fertige Presets im Ordner `presets`. |
 | 🌍 **Deutsch & Englisch** | Das Einstellungsmenü folgt der Sprache von Lively. Sieben klar getrennte Gruppen: Stil · Farben · Musik & Empfindlichkeit · Extras · Hintergrund · Presets & Sicherung · Leistung & Diagnose. |
 | 🪶 **Ressourcenschonend** | Farb-Cache, wiederverwendete Puffer, Leerlaufmodus bei Stille (5 Prüfungen pro Sekunde statt 60 Bilder), FPS-Begrenzer, Leuchten abschaltbar. Stoppt komplett, wenn Lively das Wallpaper pausiert. |
 | 🔒 **Offline & abgesichert** | Keine externen Skripte, Schriften oder Verbindungen. Content-Security-Policy, Wertebereichsprüfung, geprüfte Preset-Dateien. |
@@ -206,10 +211,15 @@ Basiert auf [lively-audio-visualizer](https://github.com/eliasfloreteng/lively-a
 | **3 · Musik & Empfindlichkeit** | Automatische Pegelanpassung, Empfindlichkeit, Frequenzbereich, Bass-Auflösung, Höhen anheben, Balken einzeln normieren, Spektrum schärfen, Dynamik, Glättung Anstieg/Abfall, tiefster FFT-Bin |
 | **4 · Extras** | Spitzen-Markierungen und Fallgeschwindigkeit, Spiegelung mit Deckkraft und Höhe |
 | **5 · Hintergrund** | Hintergrundfarbe, optionales Bild aus dem Ordner `images`, Unschärfe, Abdunkeln |
-| **6 · Presets & Sicherung** | Preset-Datei, *Preset laden*, *Letzte Einstellungen wiederherstellen*, *Reglerwerte verwenden* |
+| **6 · Presets & Sicherung** | Speicherplatz 1–3, *Einstellungen sichern*, *Einstellungen laden*, Preset-Datei, *Preset laden*, *Reglerwerte verwenden* |
 | **7 · Leistung & Diagnose** | Maximale Bildrate, Diagnose-Anzeige |
 
 ## 💾 Presets, Sicherung und Updates
+
+**Alle Einstellungen mit einem Klick sichern:** Gruppe 6 → *Speicherplatz 1–3* wählen → **Einstellungen sichern**.
+Alles, was du eingestellt hast, wird als eine Sicherung abgelegt; das Wallpaper bestätigt es auf dem Bildschirm.
+**Einstellungen laden** holt die komplette Sicherung zurück, auch nach einem Neustart von Lively oder einem
+Update im selben Ordner. Drei Speicherplätze erlauben z. B. einen Tag-, Nacht- und Gaming-Look.
 
 **Preset laden:** Gruppe 6 → Datei wählen → *Preset laden*. Mitgeliefert:
 
@@ -226,16 +236,16 @@ Basiert auf [lively-audio-visualizer](https://github.com/eliasfloreteng/lively-a
 Ein geladenes Preset überlebt Neustarts von Lively. Die Regler zeigen weiter Livelys eigene Werte, bis du einen
 bewegst; ein bewegter Regler gewinnt immer.
 
-**Eigene Einstellungen sichern:** Lively speichert die Reglerwerte in
+**Sicherung als Datei (überlebt eine Neuinstallation):** Lively speichert die Reglerwerte in
 `<Lively-Bibliothek>\SaveData\wpdata\<Wallpaper-Ordner>\<Monitor>\LivelyProperties.json`
 (die Bibliothek steht in Lively unter *Einstellungen → Allgemein*, den Wallpaper-Ordner öffnet
 *Dateispeicherort öffnen*). Diese Datei unter beliebigem Namen in den Ordner `presets` des Wallpapers kopieren,
 dann erscheint sie als Preset – das Wallpaper liest beide Preset-Formate.
 
 **Update ohne Verlust der Einstellungen:**
-- *Direkt im Ordner (empfohlen):* Rechtsklick → *Dateispeicherort öffnen* → Dateien durch die neue Version
-  ersetzen. Die Einstellungen bleiben. Neue Regler erscheinen erst nach *Standard wiederherstellen* in Livelys
-  Anpassen-Fenster; danach in Gruppe 6 *Letzte Einstellungen wiederherstellen* drücken.
+- *Direkt im Ordner (empfohlen):* zuerst **Einstellungen sichern** in einen Speicherplatz, dann Rechtsklick →
+  *Dateispeicherort öffnen* → Dateien durch die neue Version ersetzen. Neue Regler erscheinen nach
+  *Standard wiederherstellen* in Livelys Anpassen-Fenster; danach **Einstellungen laden** aus dem Speicherplatz.
 - *Neue ZIP importieren:* gesicherte `LivelyProperties.json` in den neuen `presets`-Ordner kopieren und als
   Preset laden.
 

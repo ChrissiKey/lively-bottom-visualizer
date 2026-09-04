@@ -1,78 +1,514 @@
 {
-  "styleLabel": { "type": "label", "value": "━━━━━━━━  1 · STYLE  ━━━━━━━━" },
-  "barStyle": { "type": "dropdown", "text": "Bar style", "help": "LED blocks (like a classic spectrum analyzer) or solid bars.", "items": ["Solid bars", "Segmented (LED blocks)"], "value": 1 },
-  "barCount": { "type": "slider", "text": "Number of bars", "help": "Fewer bars = bigger blocks.", "min": 8, "max": 128, "step": 1, "tick": 25, "value": 64 },
-  "barGap": { "type": "slider", "text": "Gap between bars (%)", "min": 0, "max": 80, "step": 1, "tick": 25, "value": 20 },
-  "segmentHeight": { "type": "slider", "text": "Block height in pixels (0 = square, scales with resolution)", "min": 0, "max": 120, "step": 1, "tick": 25, "value": 0 },
-  "segmentGap": { "type": "slider", "text": "Gap between blocks (% of block height)", "min": 0, "max": 80, "step": 1, "tick": 25, "value": 25 },
-  "barHeight": { "type": "slider", "text": "Maximum height (% of screen height)", "min": 5, "max": 100, "step": 1, "tick": 25, "value": 55 },
-  "zeroLine": { "type": "checkbox", "text": "Zero line: keep the bottom row lit at all times", "value": true },
-  "roundedBars": { "type": "checkbox", "text": "Rounded corners", "value": true },
-  "verticalFade": { "type": "slider", "text": "Shade: darker at the bottom, brighter at the top", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 25 },
-  "glow": { "type": "slider", "text": "Glow", "help": "0 = off (lowest CPU/GPU load).", "min": 0, "max": 40, "step": 1, "tick": 25, "value": 6 },
-  "barOpacity": { "type": "slider", "text": "Opacity (%)", "min": 10, "max": 100, "step": 1, "tick": 25, "value": 100 },
-  "bottomOffset": { "type": "slider", "text": "Distance from the bottom edge (%)", "min": 0, "max": 50, "step": 1, "tick": 25, "value": 0 },
-  "sideMargin": { "type": "slider", "text": "Side margin (%)", "min": 0, "max": 25, "step": 1, "tick": 25, "value": 2 },
-  "mirrorBars": { "type": "checkbox", "text": "Symmetric layout (bass in the center)", "value": false },
-
-  "colorLabel": { "type": "label", "value": "━━━━━━━━  2 · COLORS  ━━━━━━━━" },
-  "colorMode": { "type": "dropdown", "text": "Color mode", "help": "Each mode uses the settings of its own group below.", "items": ["Rainbow across the width", "Two colors (gradient)", "Single color", "Frequency bands (bass / mids / highs)", "Level (color by height)", "Vertical rainbow (color by height)"], "value": 0 },
-  "rainbowLabel": { "type": "label", "value": "Rainbow modes:" },
-  "hueStart": { "type": "slider", "text": "Start hue (0-360, 55 = yellow)", "min": 0, "max": 360, "step": 1, "tick": 25, "value": 55 },
-  "hueRange": { "type": "slider", "text": "Hue range (how far the rainbow travels)", "min": 0, "max": 720, "step": 5, "tick": 25, "value": 290 },
-  "rainbowSpeed": { "type": "slider", "text": "Color drift (0 = static rainbow)", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 0 },
-  "saturation": { "type": "slider", "text": "Saturation", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 90 },
-  "lightness": { "type": "slider", "text": "Lightness", "min": 10, "max": 90, "step": 1, "tick": 25, "value": 55 },
-  "bandLabel": { "type": "label", "value": "Frequency bands mode:" },
-  "bandColorBass": { "type": "color", "text": "Bass color", "value": "#ffd400" },
-  "bandColorMid": { "type": "color", "text": "Mids color", "value": "#22e06a" },
-  "bandColorHigh": { "type": "color", "text": "Highs color", "value": "#ff2fd6" },
-  "bandBassEnd": { "type": "slider", "text": "Bass up to (% of bars)", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 25 },
-  "bandMidEnd": { "type": "slider", "text": "Mids up to (% of bars)", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 65 },
-  "bandBlend": { "type": "slider", "text": "Soft transition between bands (%)", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 10 },
-  "levelLabel": { "type": "label", "value": "Level mode (color by height):" },
-  "levelColorLow": { "type": "color", "text": "Bottom color", "value": "#19e65a" },
-  "levelColorMid": { "type": "color", "text": "Middle color", "value": "#ffe020" },
-  "levelColorHigh": { "type": "color", "text": "Top color", "value": "#ff2a2a" },
-  "twoColorLabel": { "type": "label", "value": "Two colors / single color modes:" },
-  "colorA": { "type": "color", "text": "Color A (single color / gradient left)", "value": "#ff3c78" },
-  "colorB": { "type": "color", "text": "Color B (gradient right)", "value": "#38b6ff" },
-
-  "audioLabel": { "type": "label", "value": "━━━━━━━━  3 · MUSIC & SENSITIVITY  ━━━━━━━━" },
-  "autoGain": { "type": "checkbox", "text": "Automatic level adjustment (recommended)", "help": "Adapts to the volume of the music. Lively delivers raw, unscaled FFT data.", "value": true },
-  "sensitivity": { "type": "slider", "text": "Sensitivity (%)", "min": 10, "max": 300, "step": 5, "tick": 25, "value": 100 },
-  "freqRange": { "type": "slider", "text": "Frequency range used (% – low = bass & mids only)", "min": 10, "max": 100, "step": 1, "tick": 25, "value": 50 },
-  "freqCurve": { "type": "slider", "text": "Bass resolution (0 = linear/sharp, 100 = many bars for the bass/wide)", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 20 },
-  "bassCompensation": { "type": "slider", "text": "Boost highs (bass compensation)", "help": "Prevents the bass from flattening everything else.", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 40 },
-  "perBarGain": { "type": "slider", "text": "Normalize bars individually (0 = overall level only, 100 = each bar on its own)", "help": "Makes leads and highs visible even though the kick is louder.", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 40 },
-  "sharpen": { "type": "slider", "text": "Sharpen spectrum (emphasize peaks, against wide plateaus)", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 50 },
-  "contrast": { "type": "slider", "text": "Dynamics (low = smoother, high = punchier)", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 55 },
-  "smoothRise": { "type": "slider", "text": "Rise smoothing (higher = slower)", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 15 },
-  "smoothFall": { "type": "slider", "text": "Fall smoothing (higher = slower)", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 40 },
-  "includeLowestBin": { "type": "checkbox", "text": "Include the lowest FFT bin (sub-bass, may cause a constant bar)", "value": false },
-
-  "extrasLabel": { "type": "label", "value": "━━━━━━━━  4 · EXTRAS  ━━━━━━━━" },
-  "showPeaks": { "type": "checkbox", "text": "Falling peak markers", "value": false },
-  "peakFall": { "type": "slider", "text": "Peak fall speed", "min": 1, "max": 100, "step": 1, "tick": 25, "value": 40 },
-  "reflection": { "type": "checkbox", "text": "Reflection below the bars (needs 'Distance from the bottom edge' > 0)", "value": false },
-  "reflectionOpacity": { "type": "slider", "text": "Reflection: opacity (%)", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 30 },
-  "reflectionHeight": { "type": "slider", "text": "Reflection: height (% of bar height)", "min": 10, "max": 100, "step": 1, "tick": 25, "value": 50 },
-
-  "bgLabel": { "type": "label", "value": "━━━━━━━━  5 · BACKGROUND  ━━━━━━━━" },
-  "bgColor": { "type": "color", "text": "Background color", "value": "#000000" },
-  "useBgImage": { "type": "checkbox", "text": "Use a background image", "value": false },
-  "bgImage": { "type": "folderDropdown", "text": "Background image (folder 'images')", "filter": "*.jpg|*.jpeg|*.png|*.webp|*.gif", "folder": "images", "value": "dark-gradient.jpg" },
-  "bgBlur": { "type": "slider", "text": "Background blur", "min": 0, "max": 20, "step": 1, "tick": 25, "value": 0 },
-  "bgDim": { "type": "slider", "text": "Background dim (%)", "min": 0, "max": 100, "step": 1, "tick": 25, "value": 0 },
-
-  "presetLabel": { "type": "label", "value": "━━━━━━━━  6 · PRESETS & BACKUP  ━━━━━━━━" },
-  "presetHelp": { "type": "label", "value": "Load a preset from the 'presets' folder. To back up your own settings, copy Lively's saved file (see README) into that folder. Loaded presets survive restarts; the sliders above show Lively's values until you move them." },
-  "presetFile": { "type": "folderDropdown", "text": "Preset file", "filter": "*.json", "folder": "presets", "value": "hardstyle.json" },
-  "applyPreset": { "type": "button", "text": "Load the selected preset", "value": "Load preset" },
-  "restoreLast": { "type": "button", "text": "Restore the last settings saved by this wallpaper (e.g. after an update)", "value": "Restore last settings" },
-  "useLivelyValues": { "type": "button", "text": "Discard the preset and use the slider values above", "value": "Use slider values" },
-
-  "perfLabel": { "type": "label", "value": "━━━━━━━━  7 · PERFORMANCE & DIAGNOSTICS  ━━━━━━━━" },
-  "maxFps": { "type": "slider", "text": "Maximum frame rate (FPS, lower = less load)", "min": 15, "max": 60, "step": 5, "tick": 25, "value": 60 },
-  "debug": { "type": "checkbox", "text": "Show diagnostics overlay (raw audio data, top left)", "value": false }
+  "styleLabel": {
+    "type": "label",
+    "value": "━━━━━━━━  1 · STYLE  ━━━━━━━━"
+  },
+  "barStyle": {
+    "type": "dropdown",
+    "text": "Bar style",
+    "help": "LED blocks (like a classic spectrum analyzer) or solid bars.",
+    "items": [
+      "Solid bars",
+      "Segmented (LED blocks)"
+    ],
+    "value": 1
+  },
+  "barCount": {
+    "type": "slider",
+    "text": "Number of bars",
+    "help": "Fewer bars = bigger blocks.",
+    "min": 8,
+    "max": 128,
+    "step": 1,
+    "tick": 25,
+    "value": 64
+  },
+  "barGap": {
+    "type": "slider",
+    "text": "Gap between bars (%)",
+    "min": 0,
+    "max": 80,
+    "step": 1,
+    "tick": 25,
+    "value": 20
+  },
+  "segmentHeight": {
+    "type": "slider",
+    "text": "Block height in pixels (0 = square, scales with resolution)",
+    "min": 0,
+    "max": 120,
+    "step": 1,
+    "tick": 25,
+    "value": 0
+  },
+  "segmentGap": {
+    "type": "slider",
+    "text": "Gap between blocks (% of block height)",
+    "min": 0,
+    "max": 80,
+    "step": 1,
+    "tick": 25,
+    "value": 25
+  },
+  "barHeight": {
+    "type": "slider",
+    "text": "Maximum height (% of screen height)",
+    "min": 5,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 55
+  },
+  "zeroLine": {
+    "type": "checkbox",
+    "text": "Zero line: keep the bottom row lit at all times",
+    "value": true
+  },
+  "roundedBars": {
+    "type": "checkbox",
+    "text": "Rounded corners",
+    "value": true
+  },
+  "verticalFade": {
+    "type": "slider",
+    "text": "Shade: darker at the bottom, brighter at the top",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 25
+  },
+  "glow": {
+    "type": "slider",
+    "text": "Glow",
+    "help": "0 = off (lowest CPU/GPU load).",
+    "min": 0,
+    "max": 40,
+    "step": 1,
+    "tick": 25,
+    "value": 6
+  },
+  "barOpacity": {
+    "type": "slider",
+    "text": "Opacity (%)",
+    "min": 10,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 100
+  },
+  "bottomOffset": {
+    "type": "slider",
+    "text": "Distance from the bottom edge (%)",
+    "min": 0,
+    "max": 50,
+    "step": 1,
+    "tick": 25,
+    "value": 0
+  },
+  "sideMargin": {
+    "type": "slider",
+    "text": "Side margin (%)",
+    "min": 0,
+    "max": 25,
+    "step": 1,
+    "tick": 25,
+    "value": 2
+  },
+  "mirrorBars": {
+    "type": "checkbox",
+    "text": "Symmetric layout (bass in the center)",
+    "value": false
+  },
+  "colorLabel": {
+    "type": "label",
+    "value": "━━━━━━━━  2 · COLORS  ━━━━━━━━"
+  },
+  "colorMode": {
+    "type": "dropdown",
+    "text": "Color mode",
+    "help": "Each mode uses the settings of its own group below.",
+    "items": [
+      "Rainbow across the width",
+      "Two colors (gradient)",
+      "Single color",
+      "Frequency bands (bass / mids / highs)",
+      "Level (color by height)",
+      "Vertical rainbow (color by height)"
+    ],
+    "value": 0
+  },
+  "rainbowLabel": {
+    "type": "label",
+    "value": "Rainbow modes:"
+  },
+  "hueStart": {
+    "type": "slider",
+    "text": "Start hue (0-360, 55 = yellow)",
+    "min": 0,
+    "max": 360,
+    "step": 1,
+    "tick": 25,
+    "value": 55
+  },
+  "hueRange": {
+    "type": "slider",
+    "text": "Hue range (how far the rainbow travels)",
+    "min": 0,
+    "max": 720,
+    "step": 5,
+    "tick": 25,
+    "value": 290
+  },
+  "rainbowSpeed": {
+    "type": "slider",
+    "text": "Color drift (0 = static rainbow)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 0
+  },
+  "saturation": {
+    "type": "slider",
+    "text": "Saturation",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 90
+  },
+  "lightness": {
+    "type": "slider",
+    "text": "Lightness",
+    "min": 10,
+    "max": 90,
+    "step": 1,
+    "tick": 25,
+    "value": 55
+  },
+  "bandLabel": {
+    "type": "label",
+    "value": "Frequency bands mode:"
+  },
+  "bandColorBass": {
+    "type": "color",
+    "text": "Bass color",
+    "value": "#ffd400"
+  },
+  "bandColorMid": {
+    "type": "color",
+    "text": "Mids color",
+    "value": "#22e06a"
+  },
+  "bandColorHigh": {
+    "type": "color",
+    "text": "Highs color",
+    "value": "#ff2fd6"
+  },
+  "bandBassEnd": {
+    "type": "slider",
+    "text": "Bass up to (% of bars)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 25
+  },
+  "bandMidEnd": {
+    "type": "slider",
+    "text": "Mids up to (% of bars)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 65
+  },
+  "bandBlend": {
+    "type": "slider",
+    "text": "Soft transition between bands (%)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 10
+  },
+  "levelLabel": {
+    "type": "label",
+    "value": "Level mode (color by height):"
+  },
+  "levelColorLow": {
+    "type": "color",
+    "text": "Bottom color",
+    "value": "#19e65a"
+  },
+  "levelColorMid": {
+    "type": "color",
+    "text": "Middle color",
+    "value": "#ffe020"
+  },
+  "levelColorHigh": {
+    "type": "color",
+    "text": "Top color",
+    "value": "#ff2a2a"
+  },
+  "twoColorLabel": {
+    "type": "label",
+    "value": "Two colors / single color modes:"
+  },
+  "colorA": {
+    "type": "color",
+    "text": "Color A (single color / gradient left)",
+    "value": "#ff3c78"
+  },
+  "colorB": {
+    "type": "color",
+    "text": "Color B (gradient right)",
+    "value": "#38b6ff"
+  },
+  "audioLabel": {
+    "type": "label",
+    "value": "━━━━━━━━  3 · MUSIC & SENSITIVITY  ━━━━━━━━"
+  },
+  "autoGain": {
+    "type": "checkbox",
+    "text": "Automatic level adjustment (recommended)",
+    "help": "Adapts to the volume of the music. Lively delivers raw, unscaled FFT data.",
+    "value": true
+  },
+  "sensitivity": {
+    "type": "slider",
+    "text": "Sensitivity (%)",
+    "min": 10,
+    "max": 300,
+    "step": 5,
+    "tick": 25,
+    "value": 100
+  },
+  "freqRange": {
+    "type": "slider",
+    "text": "Frequency range used (% – low = bass & mids only)",
+    "min": 10,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 50
+  },
+  "freqCurve": {
+    "type": "slider",
+    "text": "Bass resolution (0 = linear/sharp, 100 = many bars for the bass/wide)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 20
+  },
+  "bassCompensation": {
+    "type": "slider",
+    "text": "Boost highs (bass compensation)",
+    "help": "Prevents the bass from flattening everything else.",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 40
+  },
+  "perBarGain": {
+    "type": "slider",
+    "text": "Normalize bars individually (0 = overall level only, 100 = each bar on its own)",
+    "help": "Makes leads and highs visible even though the kick is louder.",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 40
+  },
+  "sharpen": {
+    "type": "slider",
+    "text": "Sharpen spectrum (emphasize peaks, against wide plateaus)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 50
+  },
+  "contrast": {
+    "type": "slider",
+    "text": "Dynamics (low = smoother, high = punchier)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 55
+  },
+  "smoothRise": {
+    "type": "slider",
+    "text": "Rise smoothing (higher = slower)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 15
+  },
+  "smoothFall": {
+    "type": "slider",
+    "text": "Fall smoothing (higher = slower)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 40
+  },
+  "includeLowestBin": {
+    "type": "checkbox",
+    "text": "Include the lowest FFT bin (sub-bass, may cause a constant bar)",
+    "value": false
+  },
+  "extrasLabel": {
+    "type": "label",
+    "value": "━━━━━━━━  4 · EXTRAS  ━━━━━━━━"
+  },
+  "showPeaks": {
+    "type": "checkbox",
+    "text": "Falling peak markers",
+    "value": false
+  },
+  "peakFall": {
+    "type": "slider",
+    "text": "Peak fall speed",
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 40
+  },
+  "reflection": {
+    "type": "checkbox",
+    "text": "Reflection below the bars (needs 'Distance from the bottom edge' > 0)",
+    "value": false
+  },
+  "reflectionOpacity": {
+    "type": "slider",
+    "text": "Reflection: opacity (%)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 30
+  },
+  "reflectionHeight": {
+    "type": "slider",
+    "text": "Reflection: height (% of bar height)",
+    "min": 10,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 50
+  },
+  "bgLabel": {
+    "type": "label",
+    "value": "━━━━━━━━  5 · BACKGROUND  ━━━━━━━━"
+  },
+  "bgColor": {
+    "type": "color",
+    "text": "Background color",
+    "value": "#000000"
+  },
+  "useBgImage": {
+    "type": "checkbox",
+    "text": "Use a background image",
+    "value": false
+  },
+  "bgImage": {
+    "type": "folderDropdown",
+    "text": "Background image (folder 'images')",
+    "filter": "*.jpg|*.jpeg|*.png|*.webp|*.gif",
+    "folder": "images",
+    "value": "dark-gradient.jpg"
+  },
+  "bgBlur": {
+    "type": "slider",
+    "text": "Background blur",
+    "min": 0,
+    "max": 20,
+    "step": 1,
+    "tick": 25,
+    "value": 0
+  },
+  "bgDim": {
+    "type": "slider",
+    "text": "Background dim (%)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "tick": 25,
+    "value": 0
+  },
+  "presetLabel": {
+    "type": "label",
+    "value": "━━━━━━━━  6 · PRESETS & BACKUP  ━━━━━━━━"
+  },
+  "backupHelp": {
+    "type": "label",
+    "value": "Save ALL current settings as one backup into a slot and load them back later – e.g. before trying something new or after an update. Slots live in the wallpaper's own storage and survive restarts and in-place updates. The wallpaper shows a short confirmation on screen."
+  },
+  "slotNumber": {
+    "type": "dropdown",
+    "text": "Backup slot",
+    "items": [
+      "Slot 1",
+      "Slot 2",
+      "Slot 3"
+    ],
+    "value": 0
+  },
+  "saveSlot": {
+    "type": "button",
+    "text": "Save all current settings into the selected slot",
+    "value": "💾 Save settings"
+  },
+  "loadSlot": {
+    "type": "button",
+    "text": "Load the settings from the selected slot",
+    "value": "📂 Load settings"
+  },
+  "presetHelp": {
+    "type": "label",
+    "value": "Presets: ready-made looks from the 'presets' folder. To keep a backup as a file (e.g. for a fresh install), copy Lively's saved settings file into that folder – see README."
+  },
+  "presetFile": {
+    "type": "folderDropdown",
+    "text": "Preset file",
+    "filter": "*.json",
+    "folder": "presets",
+    "value": "hardstyle.json"
+  },
+  "applyPreset": {
+    "type": "button",
+    "text": "Load the selected preset",
+    "value": "🎨 Load preset"
+  },
+  "useLivelyValues": {
+    "type": "button",
+    "text": "Discard loaded backup/preset and use the slider values above",
+    "value": "↩ Use slider values"
+  },
+  "perfLabel": {
+    "type": "label",
+    "value": "━━━━━━━━  7 · PERFORMANCE & DIAGNOSTICS  ━━━━━━━━"
+  },
+  "maxFps": {
+    "type": "slider",
+    "text": "Maximum frame rate (FPS, lower = less load)",
+    "min": 15,
+    "max": 60,
+    "step": 5,
+    "tick": 25,
+    "value": 60
+  },
+  "debug": {
+    "type": "checkbox",
+    "text": "Show diagnostics overlay (raw audio data, top left)",
+    "value": false
+  }
 }

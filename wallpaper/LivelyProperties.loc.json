@@ -1,82 +1,253 @@
 {
   "Languages": {
     "de": {
-      "styleLabel": { "value": "━━━━━━━━  1 · STIL  ━━━━━━━━" },
-      "barStyle": { "text": "Balkenstil", "help": "LED-Blöcke (wie ein klassischer Spektrum-Analyzer) oder durchgehende Balken.", "items": ["Durchgehende Balken", "Segmentiert (LED-Blöcke)"] },
-      "barCount": { "text": "Anzahl Balken", "help": "Weniger Balken = größere Blöcke." },
-      "barGap": { "text": "Abstand zwischen Balken (%)" },
-      "segmentHeight": { "text": "Blockhöhe in Pixel (0 = quadratisch, passt sich der Auflösung an)" },
-      "segmentGap": { "text": "Lücke zwischen Blöcken (% der Blockhöhe)" },
-      "barHeight": { "text": "Maximale Höhe (% der Bildschirmhöhe)" },
-      "zeroLine": { "text": "Nulllinie: unterste Blockreihe bleibt immer an" },
-      "roundedBars": { "text": "Abgerundete Ecken" },
-      "verticalFade": { "text": "Schattierung: unten dunkler, oben heller" },
-      "glow": { "text": "Leuchten (Glow)", "help": "0 = aus (geringste CPU/GPU-Last)." },
-      "barOpacity": { "text": "Deckkraft (%)" },
-      "bottomOffset": { "text": "Abstand vom unteren Rand (%)" },
-      "sideMargin": { "text": "Seitlicher Rand (%)" },
-      "mirrorBars": { "text": "Symmetrisch (Bass in der Mitte)" },
-
-      "colorLabel": { "value": "━━━━━━━━  2 · FARBEN  ━━━━━━━━" },
-      "colorMode": { "text": "Farbmodus", "help": "Jeder Modus benutzt die Einstellungen seiner eigenen Gruppe darunter.", "items": ["Regenbogen über die Breite", "Zwei Farben (Verlauf)", "Einfarbig", "Frequenzbänder (Bass / Mitten / Höhen)", "Pegel (Farbe nach Höhe)", "Regenbogen vertikal (Farbe nach Höhe)"] },
-      "rainbowLabel": { "value": "Regenbogen-Modi:" },
-      "hueStart": { "text": "Startfarbe (Farbton 0-360, 55 = Gelb)" },
-      "hueRange": { "text": "Farbumfang (wie weit der Regenbogen läuft)" },
-      "rainbowSpeed": { "text": "Farbwanderung (0 = Regenbogen statisch)" },
-      "saturation": { "text": "Sättigung" },
-      "lightness": { "text": "Helligkeit" },
-      "bandLabel": { "value": "Modus Frequenzbänder:" },
-      "bandColorBass": { "text": "Farbe Bass" },
-      "bandColorMid": { "text": "Farbe Mitten" },
-      "bandColorHigh": { "text": "Farbe Höhen" },
-      "bandBassEnd": { "text": "Bass bis (% der Balken)" },
-      "bandMidEnd": { "text": "Mitten bis (% der Balken)" },
-      "bandBlend": { "text": "Weicher Übergang zwischen den Bändern (%)" },
-      "levelLabel": { "value": "Modus Pegel (Farbe nach Höhe):" },
-      "levelColorLow": { "text": "Farbe unten" },
-      "levelColorMid": { "text": "Farbe Mitte" },
-      "levelColorHigh": { "text": "Farbe oben" },
-      "twoColorLabel": { "value": "Modi Zwei Farben / Einfarbig:" },
-      "colorA": { "text": "Farbe A (Einfarbig / Verlauf links)" },
-      "colorB": { "text": "Farbe B (Verlauf rechts)" },
-
-      "audioLabel": { "value": "━━━━━━━━  3 · MUSIK & EMPFINDLICHKEIT  ━━━━━━━━" },
-      "autoGain": { "text": "Automatische Pegelanpassung (empfohlen)", "help": "Passt sich der Lautstärke an. Lively liefert rohe, unskalierte FFT-Daten." },
-      "sensitivity": { "text": "Empfindlichkeit (%)" },
-      "freqRange": { "text": "Genutzter Frequenzbereich (% – niedrig = nur Bass & Mitten)" },
-      "freqCurve": { "text": "Bass-Auflösung (0 = linear/scharf, 100 = viele Balken für den Bass/breit)" },
-      "bassCompensation": { "text": "Höhen anheben (Bass-Ausgleich)", "help": "Verhindert, dass der Bass alles andere plattdrückt." },
-      "perBarGain": { "text": "Balken einzeln normieren (0 = nur Gesamtpegel, 100 = jeder Balken für sich)", "help": "Macht Leads und Höhen sichtbar, obwohl der Kick lauter ist." },
-      "sharpen": { "text": "Spektrum schärfen (Spitzen hervorheben, gegen breite Flächen)" },
-      "contrast": { "text": "Dynamik (niedrig = gleichmäßiger, hoch = punchiger)" },
-      "smoothRise": { "text": "Glättung Anstieg (höher = träger)" },
-      "smoothFall": { "text": "Glättung Abfall (höher = träger)" },
-      "includeLowestBin": { "text": "Tiefsten FFT-Bin einbeziehen (Sub-Bass, kann Dauerausschlag erzeugen)" },
-
-      "extrasLabel": { "value": "━━━━━━━━  4 · EXTRAS  ━━━━━━━━" },
-      "showPeaks": { "text": "Fallende Spitzen-Markierungen" },
-      "peakFall": { "text": "Fallgeschwindigkeit der Spitzen" },
-      "reflection": { "text": "Spiegelung unter den Balken (braucht 'Abstand vom unteren Rand' > 0)" },
-      "reflectionOpacity": { "text": "Spiegelung: Deckkraft (%)" },
-      "reflectionHeight": { "text": "Spiegelung: Höhe (% der Balkenhöhe)" },
-
-      "bgLabel": { "value": "━━━━━━━━  5 · HINTERGRUND  ━━━━━━━━" },
-      "bgColor": { "text": "Hintergrundfarbe" },
-      "useBgImage": { "text": "Hintergrundbild verwenden" },
-      "bgImage": { "text": "Hintergrundbild (Ordner 'images')" },
-      "bgBlur": { "text": "Hintergrund: Unschärfe" },
-      "bgDim": { "text": "Hintergrund: Abdunkeln (%)" },
-
-      "presetLabel": { "value": "━━━━━━━━  6 · PRESETS & SICHERUNG  ━━━━━━━━" },
-      "presetHelp": { "value": "Preset aus dem Ordner 'presets' laden. Zum Sichern eigener Einstellungen die von Lively gespeicherte Datei (siehe README) in diesen Ordner kopieren. Geladene Presets überleben Neustarts; die Regler oben zeigen Livelys Werte, bis du sie bewegst." },
-      "presetFile": { "text": "Preset-Datei" },
-      "applyPreset": { "text": "Ausgewähltes Preset laden", "value": "Preset laden" },
-      "restoreLast": { "text": "Zuletzt von diesem Wallpaper gespeicherte Einstellungen wiederherstellen (z. B. nach einem Update)", "value": "Letzte Einstellungen wiederherstellen" },
-      "useLivelyValues": { "text": "Preset verwerfen und die Reglerwerte oben verwenden", "value": "Reglerwerte verwenden" },
-
-      "perfLabel": { "value": "━━━━━━━━  7 · LEISTUNG & DIAGNOSE  ━━━━━━━━" },
-      "maxFps": { "text": "Maximale Bildrate (FPS, niedriger = weniger Last)" },
-      "debug": { "text": "Diagnose-Anzeige einblenden (rohe Audiodaten, oben links)" }
+      "styleLabel": {
+        "value": "━━━━━━━━  1 · STIL  ━━━━━━━━"
+      },
+      "barStyle": {
+        "text": "Balkenstil",
+        "help": "LED-Blöcke (wie ein klassischer Spektrum-Analyzer) oder durchgehende Balken.",
+        "items": [
+          "Durchgehende Balken",
+          "Segmentiert (LED-Blöcke)"
+        ]
+      },
+      "barCount": {
+        "text": "Anzahl Balken",
+        "help": "Weniger Balken = größere Blöcke."
+      },
+      "barGap": {
+        "text": "Abstand zwischen Balken (%)"
+      },
+      "segmentHeight": {
+        "text": "Blockhöhe in Pixel (0 = quadratisch, passt sich der Auflösung an)"
+      },
+      "segmentGap": {
+        "text": "Lücke zwischen Blöcken (% der Blockhöhe)"
+      },
+      "barHeight": {
+        "text": "Maximale Höhe (% der Bildschirmhöhe)"
+      },
+      "zeroLine": {
+        "text": "Nulllinie: unterste Blockreihe bleibt immer an"
+      },
+      "roundedBars": {
+        "text": "Abgerundete Ecken"
+      },
+      "verticalFade": {
+        "text": "Schattierung: unten dunkler, oben heller"
+      },
+      "glow": {
+        "text": "Leuchten (Glow)",
+        "help": "0 = aus (geringste CPU/GPU-Last)."
+      },
+      "barOpacity": {
+        "text": "Deckkraft (%)"
+      },
+      "bottomOffset": {
+        "text": "Abstand vom unteren Rand (%)"
+      },
+      "sideMargin": {
+        "text": "Seitlicher Rand (%)"
+      },
+      "mirrorBars": {
+        "text": "Symmetrisch (Bass in der Mitte)"
+      },
+      "colorLabel": {
+        "value": "━━━━━━━━  2 · FARBEN  ━━━━━━━━"
+      },
+      "colorMode": {
+        "text": "Farbmodus",
+        "help": "Jeder Modus benutzt die Einstellungen seiner eigenen Gruppe darunter.",
+        "items": [
+          "Regenbogen über die Breite",
+          "Zwei Farben (Verlauf)",
+          "Einfarbig",
+          "Frequenzbänder (Bass / Mitten / Höhen)",
+          "Pegel (Farbe nach Höhe)",
+          "Regenbogen vertikal (Farbe nach Höhe)"
+        ]
+      },
+      "rainbowLabel": {
+        "value": "Regenbogen-Modi:"
+      },
+      "hueStart": {
+        "text": "Startfarbe (Farbton 0-360, 55 = Gelb)"
+      },
+      "hueRange": {
+        "text": "Farbumfang (wie weit der Regenbogen läuft)"
+      },
+      "rainbowSpeed": {
+        "text": "Farbwanderung (0 = Regenbogen statisch)"
+      },
+      "saturation": {
+        "text": "Sättigung"
+      },
+      "lightness": {
+        "text": "Helligkeit"
+      },
+      "bandLabel": {
+        "value": "Modus Frequenzbänder:"
+      },
+      "bandColorBass": {
+        "text": "Farbe Bass"
+      },
+      "bandColorMid": {
+        "text": "Farbe Mitten"
+      },
+      "bandColorHigh": {
+        "text": "Farbe Höhen"
+      },
+      "bandBassEnd": {
+        "text": "Bass bis (% der Balken)"
+      },
+      "bandMidEnd": {
+        "text": "Mitten bis (% der Balken)"
+      },
+      "bandBlend": {
+        "text": "Weicher Übergang zwischen den Bändern (%)"
+      },
+      "levelLabel": {
+        "value": "Modus Pegel (Farbe nach Höhe):"
+      },
+      "levelColorLow": {
+        "text": "Farbe unten"
+      },
+      "levelColorMid": {
+        "text": "Farbe Mitte"
+      },
+      "levelColorHigh": {
+        "text": "Farbe oben"
+      },
+      "twoColorLabel": {
+        "value": "Modi Zwei Farben / Einfarbig:"
+      },
+      "colorA": {
+        "text": "Farbe A (Einfarbig / Verlauf links)"
+      },
+      "colorB": {
+        "text": "Farbe B (Verlauf rechts)"
+      },
+      "audioLabel": {
+        "value": "━━━━━━━━  3 · MUSIK & EMPFINDLICHKEIT  ━━━━━━━━"
+      },
+      "autoGain": {
+        "text": "Automatische Pegelanpassung (empfohlen)",
+        "help": "Passt sich der Lautstärke an. Lively liefert rohe, unskalierte FFT-Daten."
+      },
+      "sensitivity": {
+        "text": "Empfindlichkeit (%)"
+      },
+      "freqRange": {
+        "text": "Genutzter Frequenzbereich (% – niedrig = nur Bass & Mitten)"
+      },
+      "freqCurve": {
+        "text": "Bass-Auflösung (0 = linear/scharf, 100 = viele Balken für den Bass/breit)"
+      },
+      "bassCompensation": {
+        "text": "Höhen anheben (Bass-Ausgleich)",
+        "help": "Verhindert, dass der Bass alles andere plattdrückt."
+      },
+      "perBarGain": {
+        "text": "Balken einzeln normieren (0 = nur Gesamtpegel, 100 = jeder Balken für sich)",
+        "help": "Macht Leads und Höhen sichtbar, obwohl der Kick lauter ist."
+      },
+      "sharpen": {
+        "text": "Spektrum schärfen (Spitzen hervorheben, gegen breite Flächen)"
+      },
+      "contrast": {
+        "text": "Dynamik (niedrig = gleichmäßiger, hoch = punchiger)"
+      },
+      "smoothRise": {
+        "text": "Glättung Anstieg (höher = träger)"
+      },
+      "smoothFall": {
+        "text": "Glättung Abfall (höher = träger)"
+      },
+      "includeLowestBin": {
+        "text": "Tiefsten FFT-Bin einbeziehen (Sub-Bass, kann Dauerausschlag erzeugen)"
+      },
+      "extrasLabel": {
+        "value": "━━━━━━━━  4 · EXTRAS  ━━━━━━━━"
+      },
+      "showPeaks": {
+        "text": "Fallende Spitzen-Markierungen"
+      },
+      "peakFall": {
+        "text": "Fallgeschwindigkeit der Spitzen"
+      },
+      "reflection": {
+        "text": "Spiegelung unter den Balken (braucht 'Abstand vom unteren Rand' > 0)"
+      },
+      "reflectionOpacity": {
+        "text": "Spiegelung: Deckkraft (%)"
+      },
+      "reflectionHeight": {
+        "text": "Spiegelung: Höhe (% der Balkenhöhe)"
+      },
+      "bgLabel": {
+        "value": "━━━━━━━━  5 · HINTERGRUND  ━━━━━━━━"
+      },
+      "bgColor": {
+        "text": "Hintergrundfarbe"
+      },
+      "useBgImage": {
+        "text": "Hintergrundbild verwenden"
+      },
+      "bgImage": {
+        "text": "Hintergrundbild (Ordner 'images')"
+      },
+      "bgBlur": {
+        "text": "Hintergrund: Unschärfe"
+      },
+      "bgDim": {
+        "text": "Hintergrund: Abdunkeln (%)"
+      },
+      "presetLabel": {
+        "value": "━━━━━━━━  6 · PRESETS & SICHERUNG  ━━━━━━━━"
+      },
+      "backupHelp": {
+        "value": "ALLE aktuellen Einstellungen als Ganzes in einen Speicherplatz sichern und später zurückladen – z. B. vor dem Ausprobieren oder nach einem Update. Die Speicherplätze liegen im eigenen Speicher des Wallpapers und überleben Neustarts und Updates im selben Ordner. Das Wallpaper zeigt kurz eine Bestätigung an."
+      },
+      "slotNumber": {
+        "text": "Speicherplatz",
+        "items": [
+          "Speicherplatz 1",
+          "Speicherplatz 2",
+          "Speicherplatz 3"
+        ]
+      },
+      "saveSlot": {
+        "text": "Alle aktuellen Einstellungen in den gewählten Speicherplatz sichern",
+        "value": "💾 Einstellungen sichern"
+      },
+      "loadSlot": {
+        "text": "Einstellungen aus dem gewählten Speicherplatz laden",
+        "value": "📂 Einstellungen laden"
+      },
+      "presetHelp": {
+        "value": "Presets: fertige Looks aus dem Ordner 'presets'. Für eine Sicherung als Datei (z. B. für eine Neuinstallation) Livelys gespeicherte Einstellungsdatei in diesen Ordner kopieren – siehe README."
+      },
+      "presetFile": {
+        "text": "Preset-Datei"
+      },
+      "applyPreset": {
+        "text": "Ausgewähltes Preset laden",
+        "value": "🎨 Preset laden"
+      },
+      "useLivelyValues": {
+        "text": "Geladene Sicherung/Preset verwerfen und die Reglerwerte oben verwenden",
+        "value": "↩ Reglerwerte verwenden"
+      },
+      "perfLabel": {
+        "value": "━━━━━━━━  7 · LEISTUNG & DIAGNOSE  ━━━━━━━━"
+      },
+      "maxFps": {
+        "text": "Maximale Bildrate (FPS, niedriger = weniger Last)"
+      },
+      "debug": {
+        "text": "Diagnose-Anzeige einblenden (rohe Audiodaten, oben links)"
+      }
     }
   }
 }
