@@ -2,6 +2,11 @@
 
 **English** · [Deutsch weiter unten](#deutsch)
 
+[![Download the wallpaper](https://img.shields.io/badge/Download-Bottom--Rainbow--Visualizer.zip-2ea44f?style=for-the-badge&logo=github)](https://github.com/ChrissiKey/lively-bottom-visualizer/raw/main/release/Bottom-Rainbow-Visualizer.zip)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+
+Drag the downloaded zip into Lively — that's the whole installation.
+
 LED-style audio spectrum for [Lively Wallpaper](https://github.com/rocksdanister/lively) — bars at the
 **bottom of the screen** on a black background, **no reflection**, tuned for bass-heavy music
 (hardstyle, hardcore, EDM). 60 FPS with interpolation, works at 1080p and 4K.
@@ -30,9 +35,9 @@ Based on [lively-audio-visualizer](https://github.com/eliasfloreteng/lively-audi
 |---|---|---|
 | ![](screenshots/frequency-bands.png) | ![](screenshots/level-colors.png) | ![](screenshots/zero-line.png) |
 
-Preset `classic-led.json`:
-
-![Classic LED](screenshots/preset-classic-led.png)
+| Preset `classic-led.json` | Preset `pastel.json` |
+|---|---|
+| ![Classic LED](screenshots/preset-classic-led.png) | ![Pastel](screenshots/preset-pastel.png) |
 
 ## Install
 
@@ -46,7 +51,8 @@ Preset `classic-led.json`:
 
 **Load a preset:** section 6 in the settings → choose a file → *Load preset*. Shipped presets:
 `hardstyle.json` (default look), `classic-led.json` (green/yellow/red with peak markers),
-`frequency-bands.json`, `calm-gradient.json`. A loaded preset survives restarts of Lively.
+`frequency-bands.json`, `pastel.json` (soft pastel rainbow), `neon.json` (cyan/magenta glow),
+`white-minimal.json`, `calm-gradient.json`. A loaded preset survives restarts of Lively.
 The sliders keep showing Lively's own values until you move one; a moved slider always wins.
 
 **Back up your own settings:** Lively stores the values of the sliders in
@@ -93,6 +99,15 @@ normalizes the level (global and per bar), sharpens local peaks, interpolates be
 and draws everything on a full-screen canvas. Labels come from `LivelyProperties.json` (English) and
 `LivelyProperties.loc.json` (German); Lively picks the language automatically.
 
+## Security notes
+
+- Runs entirely offline: no external scripts, fonts, images or requests. A Content-Security-Policy in
+  `index.html` blocks everything that is not part of the wallpaper folder.
+- Presets are plain JSON. Every value is range-checked against the slider limits, colors must be
+  valid hex codes, only files inside `presets/` are loaded and files above 64 KB are ignored.
+- Nothing is written to disk by the wallpaper itself; the only persistent state is a small settings
+  snapshot in the browser storage of the wallpaper's WebView.
+
 ## Credits
 
 Based on [lively-audio-visualizer](https://github.com/eliasfloreteng/lively-audio-visualizer) by
@@ -121,7 +136,8 @@ Deutsch, wenn Lively auf Deutsch läuft, und in sieben Gruppen unterteilt: Stil 
 Empfindlichkeit · Extras · Hintergrund · Presets & Sicherung · Leistung & Diagnose.
 
 **Presets:** Gruppe 6 → Datei wählen → *Preset laden*. Mitgeliefert: `hardstyle.json`,
-`classic-led.json`, `frequency-bands.json`, `calm-gradient.json`. Ein geladenes Preset überlebt
+`classic-led.json`, `frequency-bands.json`, `pastel.json` (Pastell), `neon.json`, `white-minimal.json`,
+`calm-gradient.json`. Ein geladenes Preset überlebt
 Neustarts. Die Regler zeigen weiter Livelys Werte, bis du einen bewegst; ein bewegter Regler gewinnt immer.
 
 **Eigene Einstellungen sichern:** Lively speichert die Reglerwerte in

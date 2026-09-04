@@ -1,0 +1,8 @@
+{
+  "barStyle": 0, "barCount": 80, "barGap": 45, "barHeight": 50,
+  "zeroLine": true, "roundedBars": true, "glow": 28, "verticalFade": 30,
+  "colorMode": 1, "colorA": "#00f5ff", "colorB": "#ff00c8",
+  "showPeaks": true, "peakFall": 45, "reflection": false,
+  "freqRange": 55, "freqCurve": 25, "bassCompensation": 45, "autoGain": true,
+  "perBarGain": 40, "sharpen": 45, "sensitivity": 100, "contrast": 55, "smoothRise": 15, "smoothFall": 45
+}

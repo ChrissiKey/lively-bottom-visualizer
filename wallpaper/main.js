@@ -464,10 +464,10 @@ function drawSegmentedBars(baseY, maxH, alpha, withGlow, withPeaks) {
   const areaW = W - 2 * marginX
   const slot = areaW / S.barCount
   const barW = Math.max(1, slot * (1 - S.barGap / 100))
-  const segH = S.segmentHeight > 0 ? S.segmentHeight : Math.max(2, barW)
+  const segH = S.segmentHeight > 0 ? Math.max(2, S.segmentHeight) : Math.max(2, barW)
   const gap = segH * (S.segmentGap / 100)
   const pitch = segH + gap
-  const maxSegs = Math.max(1, Math.floor((maxH + gap) / pitch))
+  const maxSegs = clamp(Math.floor((maxH + gap) / pitch), 1, 1000)
   const minSegs = S.zeroLine ? 1 : 0 // Nulllinie = unterste Blockreihe
   const radius = S.roundedBars ? Math.min(barW, segH) * 0.18 : 0
   const fade = S.verticalFade / 100
@@ -807,9 +807,12 @@ function applyOverride() {
 
 function loadPreset(file) {
   if (!file) return
+  // Nur Dateien aus dem Ordner presets, keine Pfadwechsel, keine URLs
   const path = String(file).replace(/\\/g, "/")
+  if (!/^presets\/[\w .()\-]+\.json$/i.test(path)) return
   fetch(path, { cache: "no-store" })
-    .then((r) => r.json())
+    .then((r) => r.text())
+    .then((t) => (t.length > 65536 ? null : JSON.parse(t)))
     .then((obj) => {
       const n = applySettingsObject(obj)
       if (n > 0) {
@@ -871,9 +874,16 @@ function livelyPropertyListener(name, val) {
   idleFrames = 0
 }
 
+// Erlaubte Wertebereiche (aus LivelyProperties.json), schützt vor kaputten
+// Presets: z. B. würde eine Blockhöhe von 0,01 px Millionen Blöcke erzeugen.
+const LIMITS = {"barCount":[8,128],"barGap":[0,80],"segmentHeight":[0,120],"segmentGap":[0,80],"barHeight":[5,100],"verticalFade":[0,100],"glow":[0,40],"barOpacity":[10,100],"bottomOffset":[0,50],"sideMargin":[0,25],"hueStart":[0,360],"hueRange":[0,720],"rainbowSpeed":[0,100],"saturation":[0,100],"lightness":[10,90],"bandBassEnd":[0,100],"bandMidEnd":[0,100],"bandBlend":[0,100],"sensitivity":[10,300],"freqRange":[10,100],"freqCurve":[0,100],"bassCompensation":[0,100],"perBarGain":[0,100],"sharpen":[0,100],"contrast":[0,100],"smoothRise":[0,100],"smoothFall":[0,100],"peakFall":[1,100],"reflectionOpacity":[0,100],"reflectionHeight":[10,100],"bgBlur":[0,20],"bgDim":[0,100],"maxFps":[15,60]}
+
 function setProperty(name, val) {
   if (NUMBER_PROPS.includes(name)) {
-    S[name] = toNum(val, S[name])
+    let n = toNum(val, S[name])
+    const lim = LIMITS[name]
+    if (lim) n = clamp(n, lim[0], lim[1])
+    S[name] = n
     return
   }
   if (BOOL_PROPS.includes(name)) {
@@ -881,12 +891,14 @@ function setProperty(name, val) {
     return
   }
   if (COLOR_PROPS.includes(name)) {
-    S[name] = String(val)
+    // Nur gültige Hex-Farben übernehmen
+    const str = String(val).trim()
+    if (/^#[0-9a-f]{6}$/i.test(str)) S[name] = str.toLowerCase()
     return
   }
   switch (name) {
     case "barCount":
-      S.barCount = clamp(Math.round(toNum(val, 64)), 2, 256)
+      S.barCount = clamp(Math.round(toNum(val, 64)), 8, 128)
       ensureArrays()
       break
     case "barStyle":
@@ -926,7 +938,7 @@ function setProperty(name, val) {
       applyBackground()
       break
     case "maxFps":
-      S.maxFps = clamp(toNum(val, 60), 10, 60)
+      S.maxFps = clamp(toNum(val, 60), 15, 60)
       break
     default:
       break

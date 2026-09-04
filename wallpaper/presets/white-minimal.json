@@ -1,0 +1,8 @@
+{
+  "barStyle": 1, "barCount": 48, "barGap": 30, "segmentHeight": 0, "segmentGap": 35, "barHeight": 40,
+  "zeroLine": true, "roundedBars": false, "glow": 0, "verticalFade": 45,
+  "colorMode": 2, "colorA": "#f2f2f2",
+  "showPeaks": false, "reflection": false,
+  "freqRange": 50, "freqCurve": 20, "bassCompensation": 40, "autoGain": true,
+  "perBarGain": 40, "sharpen": 50, "sensitivity": 100, "contrast": 55, "smoothRise": 20, "smoothFall": 50
+}
